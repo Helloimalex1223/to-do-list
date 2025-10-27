@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -10,16 +13,18 @@
 <body>
     <div class="container">
         <h1>To-Do List</h1>
-        <div class="filterButtons">
-                <button id = "lowPriorityFilter">Low Priority</button>
-                <button id = "mediumPriorityFilter">Medium Priority</button>
-                <button id = "highPriorityFilter">High Priority</button>
-                <button id = "displayAllCards">Remove Filter</button>
-
-                <button id = "deleteCompleted">Remove Completed</button>
+        <div class="itemNames">
+            <label for="itemName"></label>
+                <input type="text" name="itemName" id="toDoListName" placeholder="Add a new task..."><button id = "addItem">Add</button>
         </div>
-        <label for="itemName">
-            <input type="text" name="itemName" id="toDoListName"><button id = "addItem">Add Item</button></label>
+        <div class="filterButtons">
+                <button id = "lowPriorityFilter">Low</button>
+                <button id = "mediumPriorityFilter">Medium</button>
+                <button id = "highPriorityFilter">High</button>
+                <button id = "displayAllCards">Undo Filter</button>
+
+                <button id = "deleteCompleted">Clear Complete</button>
+        </div>
 
         <div class="currentCards" id = "addCardHere">
         </div>
