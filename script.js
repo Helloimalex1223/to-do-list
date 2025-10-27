@@ -21,25 +21,14 @@ if(localStorageLength == 0)
 {
     cardNumber = 0;
 }
-else
-{
-    // get all keys, convert to numbers, and sort ascending
-    cardNumber = localStorage.key(localStorage.length - 1);
-    const keys = [];
-    for (let i = 0; i < localStorage.length; i++) 
-        {
-        keys.push(Number(localStorage.key(i)));
-        }
-    keys.sort((a, b) => a - b);
-
+else if(localStorageLength > 0) {
+    const keys = Object.keys(localStorage).map(Number).sort((a,b)=>a-b);
     for (let key of keys) {
         const value = localStorage.getItem(key);
         const valSplit = value.split(",");
         addCard(valSplit[1], valSplit[0], valSplit[2], valSplit[3], true);
-}
-
-cardNumber = keys.length > 0 ? keys[keys.length - 1] + 1 : 0;
-
+    }
+    cardNumber = keys[keys.length - 1] + 1;
 }
 
 
@@ -69,8 +58,7 @@ function addCard(cardName, cardPriority, checkBoxValue, datePicked, fromStorage 
     newCard.setAttribute("id", cardNumber);
 
     //sets the card's priority (when read from localStorage)
-    if(myCardPriority != undefined)
-    {
+    if (myCardPriority && myCardPriority !== "select") {
         newCard.classList.add(myCardPriority);
     }
 
@@ -136,12 +124,6 @@ function addCard(cardName, cardPriority, checkBoxValue, datePicked, fromStorage 
     completedCheckBoxLabel.setAttribute("for", "completedCheckbox");
     completedCheckBoxLabel.innerHTML = "Completed";
 
-    //if the localStorage does not contain the key of the card (the card number)
-    if(localStorage.getItem(cardNumber) == null)
-    {
-        addCardToLocalStorage(cardNumber, [myCardPriority, cardName, myCheckBoxValue, myDatePicked]);
-    }
-    
     priorityMenuList.addEventListener("change", (e) =>
     {
         //checks if the card already contains a class added by the select element. If so, remove it.
@@ -194,6 +176,7 @@ function addCard(cardName, cardPriority, checkBoxValue, datePicked, fromStorage 
 
     if (!fromStorage) {
         addCardToLocalStorage(currentCardNumber, [myCardPriority, cardName, myCheckBoxValue, myDatePicked]);
+        cardNumber++;
     }
 
     let myButtonsContainer = document.createElement("div");
